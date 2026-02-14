@@ -3,6 +3,7 @@ defmodule Scaffold.Router do
 
   # 1. THE GATEKEEPER: Add CORS headers to every request
   plug CORSPlug, origin: ["http://localhost:5173"]
+  plug Plug.Logger, log: :debug
 
   plug :match
   plug :dispatch
