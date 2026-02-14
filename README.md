@@ -1,3 +1,4 @@
+
 # Protocol Zero (Sovereign Starter Kit)
 
 A reproducible, offline-first foundation for building sovereign systems.
@@ -6,51 +7,40 @@ A reproducible, offline-first foundation for building sovereign systems.
 - **Core (Backend):** Elixir + Plug/Cowboy (Port 4000)
 - **UI (Frontend):** Svelte 5 + TypeScript + Vite (Port 5173)
 - **Database:** SurrealDB (Embedded/Local)
-- **Contract:** Google Protobufs (Binary Transport)
 - **Ops:** Nix Flakes + Direnv + Just
 
-## ⚡ Quick Start
+## ⚡ How to Start a New Project
 
-1. **Initialize Environment** (One-time per machine)
-```bash
-direnv allow
-```
+1. **Clone the Template**
+    ```bash
+    git clone git@github.com:ChadCapra/protocol-zero.git my_new_project
+    cd my_new_project
+    ```
 
-2. **Hydrate & Run Core**
-```bash
-cd core
-just setup   # Installs deps & compiler plugins
-just proto   # Generates Elixir structs from .proto
-just dev     # Starts Server (:4000)
-```
+2. **Bootstrap (Rename & Reset)**
+    This script renames the code and resets the Git history for you.
+    ```bash
+    ./scripts/bootstrap.sh my_new_project
+    ```
 
-3. **Hydrate & Run UI**
-```bash
-cd ui
-just setup   # Installs Node modules
-just proto   # Generates TypeScript definitions from .proto
-just dev     # Starts Frontend (:5173)
-```
+3. **Ignite Engines**
+    The root folder is just a container. You must enable the tools in each subfolder.
 
-4. **Start Database**
-```bash
-cd core
-just db      # Starts SurrealDB on :8000
-```
+    **Backend:**
+    ```bash
+    cd core
+    direnv allow
+    just setup && just proto && just dev
+    ```
+
+    **Frontend:**
+    ```bash
+    cd ui
+    direnv allow
+    just setup && just proto && just dev
+    ```
 
 ## 🛠 Workflow
 
-- **Renaming the Project:**
-  Run `./scripts/rename_project.sh <new_snake_case_name>` to convert Protocol Zero into your new app.
-
-- **Modifying the API:**
-  1. Edit `core/priv/proto/base.proto`
-  2. Run `just proto` in `core/`
-  3. Run `just proto` in `ui/`
-  4. Implement logic in `core/lib/scaffold/router.ex`
-
-## 💾 Database Access
-Use the built-in Repo module in Elixir:
-```elixir
-ProtocolZero.Repo.sql("CREATE user:chad SET age = 46")
-```
+- **Database:** Run `just db` inside `core/`.
+- **Contracts:** Edit `core/priv/proto/base.proto` and run `just proto` in both folders.
