@@ -1,0 +1,25 @@
+{
+  "name": "protocol-zero-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "@tsconfig/svelte": "^5.0.7",
+    "svelte": "^5.0.0-next.1",
+    "svelte-check": "^3.6.0",
+    "ts-proto": "^1.168.0",
+    "tslib": "^2.6.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "long": "^5.2.3",
+    "protobufjs": "^7.2.6"
+  }
+}

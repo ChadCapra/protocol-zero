@@ -1,0 +1,18 @@
+syntax = "proto3";
+package base.v1;
+
+// The simplest possible "Are you alive?" check
+message Ping {
+  int64 timestamp = 1;
+}
+
+message Pong {
+  int64 timestamp = 1;
+  string server_name = 2;
+}
+
+message ServiceRequest {
+  oneof payload {
+    Ping ping = 1;
+  }
+}

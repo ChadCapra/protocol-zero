@@ -1,0 +1,29 @@
+# --- NIX & ENVIRONMENT ---
+.direnv/
+.envrc.cache
+.envrc.override
+
+# --- ELIXIR (Core) ---
+/core/_build/
+/core/deps/
+/core/.elixir_ls/
+/core/erl_crash.dump
+/core/*.ez
+# Generated Elixir structs
+/core/lib/proto/*.ex
+
+# --- NODE / SVELTE (UI) ---
+/ui/node_modules/
+/ui/dist/
+/ui/.svelte-kit/
+/ui/.npm/
+# Generated TypeScript definitions
+/ui/src/proto/*.ts
+
+# --- DATABASE (SurrealDB) ---
+/core/priv/data/
+*.db
+
+# --- OS ---
+.DS_Store
+Thumbs.db

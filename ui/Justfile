@@ -1,0 +1,29 @@
+default:
+    @just --list
+
+# --- 1. BOOTSTRAP ---
+setup:
+    @echo "🚀 Initializing UI Sovereignty..."
+    npm install
+    @echo "✅ NPM modules installed."
+    @echo "👉 Now run: just proto"
+
+# --- 2. CODEGEN ---
+proto:
+    @echo "🔮 Generating TypeScript Contracts..."
+    mkdir -p src/proto
+    # FIX: Added --ts_proto_opt=esModuleInterop=true to fix 'require is not defined'
+    protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto \
+           --ts_proto_out=./src/proto \
+           --ts_proto_opt=esModuleInterop=true \
+           --ts_proto_opt=forceLong=long \
+           -I ../core/priv/proto \
+           ../core/priv/proto/base.proto
+    @echo "✅ TypeScript definitions generated."
+
+# --- 3. RUNTIME ---
+dev:
+    npm run dev
+
+build:
+    npm run build

@@ -1,0 +1,38 @@
+# The "Help" command runs by default
+default:
+    @just --list
+
+# --- 1. BOOTSTRAP (Run this once on a new machine) ---
+setup:
+    @echo "🚀 Initializing Backend Sovereignty..."
+    mix deps.get
+    # Install the protoc plugin locally (so we don't rely on global state)
+    mix escript.install hex protobuf --force
+    # Ensure the escript path is known to the shell
+    @echo "✅ Dependencies installed."
+    @echo "👉 Now run: just proto"
+
+# --- 2. CODEGEN (Run this when .proto files change) ---
+proto:
+    @echo "🔮 Generating Elixir Protobufs..."
+    mkdir -p lib/proto
+    # We add the local escript path to PATH temporarily for this command
+    export PATH="$HOME/.mix/escripts:$PATH"; \
+    protoc --elixir_out=./lib/proto -I ./priv/proto base.proto
+    @echo "✅ Protobufs generated."
+
+# --- 3. RUNTIME ---
+server:
+    @echo "⚡ Starting Protocol Zero Core..."
+    mix run --no-halt
+
+dev:
+    iex -S mix
+
+# --- 4. DATA ---
+db:
+    @echo "💾 Starting Sovereign DB..."
+    surreal start --user root --pass root file:priv/data/mydatabase.db
+
+clean:
+    rm -rf _build deps lib/proto
