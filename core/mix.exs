@@ -27,13 +27,13 @@ defmodule ProtocolZero.MixProject do
     [
       {:plug_cowboy, "~> 2.6"},
       {:cors_plug, "~> 3.0"},
-      {:websock_adapter, "~> 0.5"},
       {:protobuf, "~> 0.12"},
-      {:req, "~> 0.4"},
       {:jason, "~> 1.4"},
       {:dotenvy, "~> 0.8"},
       {:elixir_uuid, "~> 1.2"},
-      {:typed_struct, "~> 0.3"}
+      {:typed_struct, "~> 0.3"},
+      {:ecto_sql, "~> 3.10"},
+      {:postgrex, ">= 0.0.0"}
     ]
   end
 end
